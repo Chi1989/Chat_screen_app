@@ -1,46 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:second_task/body.dart';
 
-class ChatsBubble extends StatelessWidget {
-  const ChatsBubble({
-    Key? key,
-    required this.text,
-    required this.isCurrentUser,
-  }) : super(key: key);
-  final String text;
-  final bool isCurrentUser;
+class ChatApp extends StatelessWidget {
+  const ChatApp({Key? key,
 
+  }) : super(key: key,);
 
   @override
-  Widget build(BuildContext context) {
-    return Padding(padding: EdgeInsets.fromLTRB(isCurrentUser ? 64.0 : 16.0, 4, isCurrentUser ? 16.0 : 64.0, 4),
-      child: Align(
-        alignment: isCurrentUser ? Alignment.centerRight : Alignment.centerLeft,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            color: isCurrentUser ? Colors.blue : Colors.blueAccent, borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(padding: const EdgeInsets.all(12),
-            child: Text('Hi Chi, Are you done with the internship?',
-              style: Theme.of(context).textTheme.bodyText1!.copyWith(color: isCurrentUser ? Colors.white : Colors.black),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
 
-class ChatApp extends StatefulWidget {
-  const ChatApp({Key? key}) : super(key: key);
-
-  @override
-  State<ChatApp> createState() => _ChatAppState();
-}
-
-class _ChatAppState  extends State<ChatApp> {
-  @override
-  Widget build(BuildContext context) {
+Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
@@ -48,7 +17,9 @@ class _ChatAppState  extends State<ChatApp> {
         backgroundColor: Colors.white,
         leading: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: CircleAvatar(),
+          child: CircleAvatar(
+            backgroundImage: AssetImage('assets/images/elonmusk.jpeg'),
+          ),
         ),
         title: Text('by Boldare',
         style: TextStyle(color: Colors.black),
@@ -59,7 +30,17 @@ class _ChatAppState  extends State<ChatApp> {
           IconButton(onPressed: (){}, icon: Image.asset('assets/images/info.jpeg'),),
         ],
       ),
-      body:  ChatsBubble(text: 'Hi Chi, Are you done with the internship?', isCurrentUser: true,
+      body:  Padding(
+        padding: const EdgeInsets.all(8.0),
+          child: ListView(
+            children: [
+          ChatBubble(text: 'How is work today?', isCurrentUser: false),
+      ChatBubble(text: 'The work went well at the office', isCurrentUser: true),
+      ChatBubble(text: 'I am craving corn and pear', isCurrentUser: false),
+      ChatBubble(text: 'Xup Chi, Are you done with the internship?', isCurrentUser: true),
+      ChatBubble(text: 'Few months time', isCurrentUser: false),
+            ],
+          ),
       ),
       bottomSheet: SizedBox(
         height: 100,
@@ -100,4 +81,6 @@ class _ChatAppState  extends State<ChatApp> {
     );
   }
 }
+
+
 
